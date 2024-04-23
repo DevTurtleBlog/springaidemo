@@ -24,7 +24,7 @@ public class OpenAiRestController {
 	@Autowired
     public OpenAiRestController(OpenAiChatClient chatClient) {
         this.chatClient = chatClient;
-    }
+    } 
 	
 	@GetMapping("/ai/generate")
     public Map generate(@RequestParam(value = "message") String message) {
@@ -40,8 +40,9 @@ public class OpenAiRestController {
 	@GetMapping("/ai/function")
 	public Generation functionCalling(@RequestParam(value = "message") String message) {
 		UserMessage userMessage = new UserMessage(message);
-		ChatResponse response = chatClient.call(new Prompt(List.of(userMessage),
-				OpenAiChatOptions.builder().withFunction("rectangeleAreaFunction").build()));
+		Prompt prompt = new Prompt(message,
+				OpenAiChatOptions.builder().withFunction("rectangeleAreaFunction").build());
+		ChatResponse response = chatClient.call(prompt);
 		return response.getResult();
 	}
 	
