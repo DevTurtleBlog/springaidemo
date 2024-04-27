@@ -16,5 +16,6 @@ public class Functions {
 	public Function<RectangleAreaService.Request, RectangleAreaService.Response> rectangeleAreaFunction() {
 		return new RectangleAreaService();
 	}
+	
 
 }
